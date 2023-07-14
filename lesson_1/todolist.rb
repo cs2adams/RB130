@@ -112,9 +112,29 @@ class TodoList
     todos.reduce(header) { |memo, todo| memo + "\n" + todo.to_s }
   end
 
+  def each
+    idx = 0
+    while idx < size
+      yield(item_at(idx))
+      idx += 1
+    end
+  end
 
   private
 
   attr_accessor :todos
 
+end
+
+todo1 = Todo.new("Buy milk")
+todo2 = Todo.new("Clean room")
+todo3 = Todo.new("Go to gym")
+
+list = TodoList.new("Today's Todos")
+list.add(todo1)
+list.add(todo2)
+list.add(todo3)
+
+list.each do |todo|
+  puts todo                   # calls Todo#to_s
 end
