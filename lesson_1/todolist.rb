@@ -123,16 +123,12 @@ class TodoList
   end
 
   def select
-    output = []
+    selection = TodoList.new("Selected Todos")
 
     each do |todo|
-      output << todo if yield(todo)
+      selection.add(todo) if yield(todo)
     end
     
-    output
-
-    selection = TodoList.new("Selected Todos")
-    output.each { |todo| selection.add(todo) }
     selection
   end
 
