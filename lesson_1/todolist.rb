@@ -118,6 +118,22 @@ class TodoList
       yield(item_at(idx))
       idx += 1
     end
+
+    self
+  end
+
+  def select
+    output = []
+
+    each do |todo|
+      output << todo if yield(todo)
+    end
+    
+    output
+
+    selection = TodoList.new("Selected Todos")
+    output.each { |todo| selection.add(todo) }
+    selection
   end
 
   private
@@ -135,6 +151,8 @@ list.add(todo1)
 list.add(todo2)
 list.add(todo3)
 
-list.each do |todo|
-  puts todo                   # calls Todo#to_s
-end
+todo1.done!
+
+results = list.select { |todo| todo.done? }    # you need to implement this method
+
+puts results
