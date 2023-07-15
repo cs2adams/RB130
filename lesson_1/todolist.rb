@@ -57,6 +57,7 @@ class TodoList
 
     todos << todo
   end
+  alias_method :<<, :add
 
   def size
     todos.size
